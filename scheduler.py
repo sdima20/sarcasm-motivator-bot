@@ -1,7 +1,7 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from content.content_loader import get_random_post
 from services.post_sender import send_post
-from services.openai_client import generate_sarcastic_post
+from services.gemini_client import generate_sarcastic_post
 from aiogram import Bot
 from config import BOT_TOKEN
 
