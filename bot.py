@@ -11,7 +11,7 @@ async def main():
     print("🤖 Бот запущено. Чекає на час посту...")
 
     # 🚀 Тестовий пост одразу при запуску
-    await send_sarcastic_post()
+    #await send_sarcastic_post()
 
     await dp.start_polling(bot)
 
