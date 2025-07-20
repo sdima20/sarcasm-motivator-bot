@@ -2,9 +2,11 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from content.content_loader import get_random_post
 from services.post_sender import send_post
 from services.gemini_client import generate_sarcastic_post
+from services.image_post_creator import create_image_post
+from aiogram.types import FSInputFile
 from aiogram import Bot
 import asyncio
-from config import BOT_TOKEN
+from config import BOT_TOKEN, CHANNEL_ID
 from datetime import datetime
 
 bot = Bot(token=BOT_TOKEN)
@@ -32,4 +34,6 @@ async def send_sarcastic_post():
     else:
         post = get_random_post()
 
-    await send_post(bot, post)
+    #await send_post(bot, post)
+    path = create_image_post(post)
+    await bot.send_photo(CHANNEL_ID, photo=FSInputFile(path), caption="")
