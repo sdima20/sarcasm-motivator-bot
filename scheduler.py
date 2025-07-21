@@ -16,8 +16,8 @@ def setup_schedule():
     scheduler.add_job(
         send_sarcastic_post,
         trigger='interval',
-        minutes=5,
-        next_run_time=datetime.now()  # запуск через 30 хв після старту, можна прибрати, щоб почати одразу
+        minutes=15,
+        next_run_time=datetime.now()
     )
     scheduler.start()
 

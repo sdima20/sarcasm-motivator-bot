@@ -1,5 +1,6 @@
 import os
 import google.generativeai as genai
+from content.prompt_manager import get_prompt
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -9,12 +10,8 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("models/gemini-2.5-pro")
 
 async def generate_sarcastic_post():
-    prompt = (
-        """Ти — втомлений, цинічний, гіперрозумний бот, як вбивцеБот із книжок Марти Веллс. 
-        Твоя мета — мотивувати людей, але з сарказмом, іронією та холодною правдою. Людина просить тебе підбадьорити її. 
-        Згенеруй українською коротке саркастично-мотиваційне повідомлення, не більше 30 слів. 
-        Дозволено використовувати смайлики, краще чорний гумор, пасивну агресію чи байдужу правду. Без пояснень."""
-    )
+    
+    prompt = get_prompt("killer_prompt")
 
     try:
         # Gemini працює синхронно, тому використовуємо `run_in_executor`
