@@ -1,13 +1,14 @@
 import json
+from pathlib import Path
 
-PROMPTS_FILE = "content\prompts.json"
+PROMPTS_FILE = Path("content\prompts.json")
 
 def load_prompts():
-    with open(PROMPTS_FILE, "r", encoding="utf-8") as f:
+    with PROMPTS_FILE.open("r", encoding="utf-8") as f:
         return json.load(f)
 
 def get_prompt(key: str) -> str:
-    return load_prompts().get(key, "")
+    return load_prompts().get(key, "Промпт не знайдено.")
 
 def update_prompt(key: str, new_prompt: str):
     prompts = load_prompts()
