@@ -9,10 +9,8 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 model = genai.GenerativeModel("models/gemini-2.5-pro")
 
-async def generate_sarcastic_post():
+async def generate_sarcastic_post(prompt):
     
-    prompt = get_prompt("killer_prompt")
-
     try:
         # Gemini працює синхронно, тому використовуємо `run_in_executor`
         import asyncio

@@ -3,6 +3,7 @@ from content.content_loader import get_random_post
 from services.post_sender import send_post
 from services.gemini_client import generate_sarcastic_post
 from services.image_post_creator import create_image_post
+from content.prompt_manager import get_current_prompt
 from aiogram.types import FSInputFile
 from aiogram import Bot
 import asyncio
@@ -22,16 +23,12 @@ def setup_schedule():
     scheduler.start()
 
 async def send_sarcastic_post():
-    # 50/50: або з бази, або згенерувати
-    from random import choice
-    use_ai = choice([True, True])
+    
+    prompt = get_current_prompt()
 
-    if use_ai:
-        post = await generate_sarcastic_post()
-        if not post:
-            print("⚠️ GPT не згенерував. fallback -> база")
-            post = get_random_post()
-    else:
+    post = await generate_sarcastic_post(prompt=prompt)
+    if not post:
+        print("⚠️ GPT не згенерував. fallback -> база")
         post = get_random_post()
 
     #await send_post(bot, post)
