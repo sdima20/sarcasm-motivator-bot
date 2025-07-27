@@ -1,4 +1,5 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler.triggers.cron import CronTrigger
 from content.content_loader import get_random_post
 from services.post_sender import send_post
 from services.gemini_client import generate_sarcastic_post
