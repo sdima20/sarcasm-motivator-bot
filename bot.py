@@ -5,16 +5,14 @@ from scheduler import setup_schedule, send_sarcastic_post
 from handlers import admin
 
 bot = Bot(token=BOT_TOKEN)
-dp = Dispatcher()
-dp.include_router(admin.router)
+
 
 async def main():
-    setup_schedule()
-    print("🤖 Бот запущено. Чекає на час посту...")
-
-    # 🚀 Тестовий пост одразу при запуску
-    #await send_sarcastic_post()
-
+    dp = Dispatcher()
+    dp.include_router(admin.router)
+    await setup_schedule()
+    print("🤖 Бот запущено.")
+    
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
