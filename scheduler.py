@@ -34,3 +34,17 @@ async def send_sarcastic_post():
     #await send_post(bot, post)
     path = create_image_post(post)
     await bot.send_photo(CHANNEL_ID, photo=FSInputFile(path), caption="")
+
+def setup_schedule():
+    # Час публікацій у добі
+    posting_hours = [8, 11, 14, 17, 21]  # 5 постів на день
+
+    for hour in posting_hours:
+        scheduler.add_job(
+            lambda: asyncio.create_task(send_sarcastic_post()),
+            trigger=CronTrigger(hour=hour, minute=0),
+            name=f"Post at {hour}:00"
+        )
+
+    scheduler.start()
+    print("🕒 Розклад публікацій запущено.")
